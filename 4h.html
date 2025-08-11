@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container{
+      display: flexbox;
+      justify-content: center;
+      height: 100vh;
+      background-color: rgb(200, 200, 200);
+      align-items: center;
+      
+    }
+    button{
+      background: rgb(25, 135, 84);
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      margin-right: 10px;
+      cursor: pointer;
+
+    }
+  </style>
+</head>
+<body>
+  <div class="js-container"></div>
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+  <script src="https://unpkg.com/supersimpledev/babel.js"> </script>
+  <script type='text/babel'>
+
+  function App(){
+    const [count, setCount] = React.useState(0)
+    const [isPlay, setIsPlay] = React.useState(false)
+    function resetCounter(){
+        setCount(0)
+      }
+    function increaseCount(){
+        setCount(count + 1)
+      }
+    const buttonElem = React.useRef(null);
+      React.useEffect(()=>{
+        if(!isPlay) return;
+        const id = setInterval(()=>{
+          buttonElem.current.click();
+        }, 1000)
+        return () => clearInterval(id)
+      },
+      [isPlay]);
+    return(
+    <div className="container">
+      <button
+          ref = {buttonElem}
+          onClick = {increaseCount}>
+          {count === 1 ?'clicked 1 time': (`clicked ${count} times`)}
+        
+      </button>
+    
+      <button
+        onClick = {resetCounter}>
+        reset Count
+      </button>
+      <button
+      onClick = {()=>setIsPlay(p=>!p)}
+      >{isPlay? "Stop Play": "play"}
+      </button>
+    </div>
+  );
+      
+      
+
+  }
+
+  const container = document.querySelector('.js-container');
+  ReactDOM.createRoot(container).render(<App />);
+
+  </script>
+  
+</body>
+</html>
