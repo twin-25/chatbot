@@ -9,9 +9,10 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "mktest": "mkdir test",
-    "rmtest" : "rmdir test"
+    "rmtest": "rmdir test"
   },
   "dependencies": {
+    "dayjs": "^1.11.13",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "supersimpledev": "^8.6.4"

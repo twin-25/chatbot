@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 import { ChatInput } from './components/ChatInput.jsx';
 import ChatMessages from './components/ChatMessages.jsx';
 import './App.css';
+import { Chatbot } from 'supersimpledev';
+import dayjs from 'dayjs';
 
 export function useAutoScroll(dependencies){
           const containerRef = useRef(null);
@@ -24,7 +26,16 @@ export function useAutoScroll(dependencies){
 
 
  function App(){
-        const [chatMessages, setChatMessages] = useState([])
+         const [chatMessages, setChatMessages] = useState([]); 
+
+        useEffect(()=>{
+          Chatbot.addResponses({"I love you" : "I love you too"});
+        },[]);
+
+        useEffect(()=>{
+          localStorage.setItem('messages', JSON.stringify(chatMessages));
+
+        },[chatMessages]);
 
         return (
           <div className="app-container">
